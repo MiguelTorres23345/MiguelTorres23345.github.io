@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia de Colombia – Narrativa Interactiva</title>
+
+    <style>
+        :root {
+            --azul-profundo: #0b1f3b;
+            --amarillo-calido: #f5c542;
+            --rojo-suave: #d45757;
+            --gris-claro: #f4f4f6;
+            --blanco-roto: #fdfdfd;
+            --texto-principal: #1f1f1f;
+            --texto-suave: #555555;
+            --max-width: 1100px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, Arial, sans-serif;
+            background-color: var(--gris-claro);
+            color: var(--texto-principal);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--azul-profundo), #122b57);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            background-color: rgba(255,255,255,0.1);
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            margin-left: 0.4rem;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.4);
+        }
+
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto 3rem auto;
+            padding: 1.5rem;
+        }
+
+        .page { display: none; min-height: 100vh; }
+        .page.active { display: block; animation: fadeIn 0.35s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .page-subtitle {
+            font-size: 2rem;
+            text-align: center;
+            font-weight: 600;
+            opacity: 0.85;
+            margin-bottom: 2rem;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 1.6rem auto;
+            color: var(--texto-suave);
+            font-size: 1rem;
+        }
+
+        .inicio-image-box {
+            width: 100%;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0.6rem;
+            background: var(--blanco-roto);
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.10);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+        }
+
+        .inicio-image {
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .retrato-box {
+            width: fit-content;
+            max-width: 380px;
+            margin: 3rem auto;
+            padding: 1rem;
+            border-radius: 14px;
+            background: var(--blanco-roto);
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .retrato-img {
+            width: 100%;
+            border-radius: 12px;
+        }
+        .retrato-caption { display:none; margin-top:0.8rem; font-size:0.92rem; color:var(--texto-suave); }
+        .retrato-caption.open { display:block; }
+
+        .timeline-centered {
+            width: 100%;
+            max-width: 1000px;
+            margin: 2.5rem auto;
+            position: relative;
+        }
+
+        .timeline-line-centered {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background-color: var(--amarillo-calido);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            width: 50%;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item.right { left:50%; padding-left:2rem; }
+        .timeline-item.left { left:0; padding-right:2rem; text-align:right; }
+
+        .timeline-dot {
+            position:absolute;
+            top:15px;
+            width:18px; height:18px;
+            border-radius:50%;
+            background:white;
+            border:3px solid var(--amarillo-calido);
+            left:100%;
+            transform:translateX(-50%);
+        }
+
+        .timeline-item.left .timeline-dot {
+            left:0;
+            transform:translateX(-50%);
+        }
+
+        .timeline-card {
+            background:white;
+            padding:1.2rem 1.4rem;
+            border-radius:12px;
+            border:1px solid rgba(0,0,0,0.1);
+            box-shadow:0 8px 24px rgba(0,0,0,0.08);
+            cursor:pointer;
+        }
+
+        .timeline-card.simple { cursor:default; }
+
+        .timeline-card h3 {
+            font-size:1.3rem;
+            font-weight:700;
+        }
+
+        .timeline-card h4 {
+            font-size:1.1rem;
+            font-weight:600;
+            margin-bottom:0.8rem;
+        }
+
+        .timeline-card img {
+            width:100%;
+            border-radius:10px;
+            margin-bottom:0.8rem;
+            height:240px;
+            object-fit:cover;
+        }
+
+        .timeline-description {
+            display:none;
+            margin-top:0.5rem;
+            padding-left:0.6rem;
+            border-left:3px solid var(--amarillo-calido);
+            color:var(--texto-suave);
+            font-size:0.92rem;
+        }
+
+        .timeline-description.open { display:block; }
+
+        .simple-text {
+            font-size:0.95rem;
+            margin-top:0.5rem;
+        }
+
+        footer {
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding: 1.6rem;
+            display: flex;
+            justify-content: space-between;
+            color: var(--texto-suave);
+            font-size: 0.9rem;
+            max-width: var(--max-width);
+            margin: 3rem auto 1rem auto;
+        }
+
+        .image-card-container {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2.5rem 0;
+        flex-wrap: wrap;
+        }
+
+        .image-card {
+            width: 100%;
+            max-width: 510px;
+            background: var(--blanco-roto);
+            border-radius: 16px;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .image-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.10);
+        }
+
+        .image-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            text-align: center;
+        }
+
+        .image-card-img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            object-fit: cover;
+        }
+
+        .image-card-caption {
+            font-size: 0.82rem;
+            color: var(--texto-suave);
+            text-align: center;
+            margin-bottom: 0.6rem;
+            opacity: 0.85;
+        }
+
+        .image-card-text {
+            display: none;
+            font-size: 0.92rem;
+            color: var(--texto-suave);
+            border-left: 3px solid var(--amarillo-calido);
+            padding-left: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .image-card-text.open {
+            display: block;
+        }
+
+        .menu-container {
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .menu-button {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            padding: 0.55rem 1rem;
+            font-size: 1rem;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .menu-button:hover {
+            background: rgba(255,255,255,0.28);
+        }
+
+        .menu-panel {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background: var(--blanco-roto);
+            padding: 1rem 1.3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            min-width: 220px;
+            animation: fadeMenu 0.25s ease;
+        }
+
+        .menu-panel a {
+            display: block;
+            padding: 0.45rem 0;
+            text-decoration: none;
+            color: var(--azul-profundo);
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .menu-panel a:last-child {
+            border-bottom: none;
+        }
+
+        .menu-panel a:hover {
+            color: var(--rojo-suave);
+        }
+
+        /* Animación */
+        @keyframes fadeMenu {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .fixed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;            /* altura fija → para evitar que con la modificacion del menu se modifique el tamaño del header */
+        }
+
+        .header-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .references-container {
+            max-width: 900px;          /* texto más angosto → más legible */
+            margin: 0 auto;            /* centra el bloque */
+            padding: 1.5rem;
+        }
+
+        .reference-block {
+            margin-bottom: 2.2rem;     /* espacio entre bloques */
+        }
+
+        .reference-item {
+            margin-bottom: 1.2rem;     /* espacio entre referencias individuales */
+            line-height: 1.55;         /* mejora lectura */
+            font-size: 1rem;
+            color: var(--texto-principal);
+        }
+
+        .reference-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner fixed-header">
+          <div class="header-title">Historia de Colombia</div>
+
+          <div class="menu-container">
+              <button class="menu-button" onclick="toggleMenu()">☰ Menú</button>
+
+              <div id="menu-panel" class="menu-panel">
+                  <a onclick="showPage('inicio'); toggleMenu()">Inicio</a>
+                  <a onclick="showPage('contexto'); toggleMenu()">El cambio de siglo</a>
+                  <a onclick="showPage('edu-inicial'); toggleMenu()">Educación inicial</a>
+                  <a onclick="showPage('labor-inicial'); toggleMenu()">Educación superior y primeros trabajos</a>
+                  <a onclick="showPage('labor-consolidada'); toggleMenu()">Trayectoria laboral</a>
+                  <a onclick="showPage('reflexion'); toggleMenu()">Reflexión</a>
+                  <a onclick="showPage('referencias'); toggleMenu()">Referencias</a>
+              </div>
+          </div>
+    </div>
+</header>
+
+
+<main>
+
+<!— ===========================================================================
+INICIO
+============================================================================-->
+<section id="inicio" class="page active">
+
+    <h1 class="page-title">La Historia de María</h1>
+    <h2 class="page-subtitle">y la educación en Colombia en el siglo XX</h2>
+
+    <div class="inicio-image-box">
+        <img src="01-graficos/1.jpg" class="inicio-image">
+    </div>
+
+    <p class="section-description">
+    Esta es la historia de María T. Bernal, una mujer santandereana nacida en
+    1948 en la zona urbana del municipio del Socorro.<br>
+    </p>
+
+    <p class="section-description">
+      Esta narración toma dos ejes centrales de la vida de María acotados en
+      periodos concretos de tiempo: el educativo (1958-1981) y el laboral
+      (1970-1990) que se enmarcan en gran parte en el siglo XX. El eje educativo
+      tiene una relación clara con el sistema educativo colombiano de la segunda
+      mitad del siglo XX; y el eje laboral también, toda vez que María trabajó en
+      el sector educativo desde los inicios de su vida laboral.
+    </p>
+    <p class="section-description">
+      Con el fin de contrastar esta historia de vida con la historia de Colombia
+      se contextualiza (i) la historia de la educación en Colombia en la primera
+      mitad del siglo XX, para dar un panorama general del sistema educativo al
+      que entraba María; (ii) la primaria y secundaria de María (1958-1969) y sus
+      contrastes con la evolución educativa en esos años en el país; (iii)
+      el primer transito al mercado laboral de María (1969-1972) y el mercado
+      laboral de la época; (iv) la educación universitaria de María (1972-1981) y
+      el sector de educación terciaria colombiano; y (v), la vida laboral
+      consolidada en el sector educativo de María en Boyacá entre 1982-1998.
+    </p>
+
+    <div class="retrato-box" onclick="toggleRetrato()">
+        <img src="01-graficos/2.jpg" class="retrato-img">
+        <div id="retrato-caption" class="retrato-caption">
+            <strong>Fotografía 1. María T. Bernal (1982)</strong><br>
+            Fuente: Archivo Familiar.
+        </div>
+    </div>
+
+</section>
+
+<!-===========================================================================
+SECCION 1
+============================================================================-->
+
+<section id="contexto" class="page">
+
+    <h1 class="page-title">La Educación en Colombia</h1>
+    <h2 class="page-subtitle">en la primera mitad del siglo XX</h2>
+
+    <p class="section-description">
+        La historia de la educación de la primera mitad del siglo XX se puede dividir
+        en dos grandes partes: el periodo del siglo que perteneció a la hegemonía
+        conservadora (1900-1930); y la hegemonía liberal (1930-1946).
+    </p>
+
+    <h2 class="page-subtitle" style="margin-top: 2.5rem; font-size: 2rem;">
+        Cambios educativos en la primera mitad del siglo
+    </h2>
+
+    <p class="section-description" style="font-size:1rem; margin-top:-0.5rem;">
+        1900–1950
+    </p>
+
+    <div class="timeline-centered">
+
+        <div class="timeline-line-centered"></div>
+
+        <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card" onclick="toggleDescription('ctx1')">
+                <h3>1863–1886</h3>
+                <h4>El Olimpo Radical</h4>
+                <img src="01-graficos/3.jpg">
+                <div id="ctx1" class="timeline-description" style="text-align: justify;">
+                  “Fue un periodo en el que el Partido Liberal gobernó
+                  ininterrumpidamente, en él se hicieron reformas liberales
+                  en la economía, se cambió a un modelo de organización política
+                  a un modelo federal. Entre los cambios se promulgó un decreto
+                  en 1975 que estableció a la educación primaria como: Laica,
+                  Gratuita y Obligatoria.<br>
+                  La obligatoriedad fue clave, aumentó el número de matriculados.
+                  Paso de 43.458 en 1871 a 80.458 en 1876.
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card" onclick="toggleDescription('ctx2')">
+                <h3>1886–1889</h3>
+                <h4>Inicio de la Hegemonía Conservadora</h4>
+                <img src="01-graficos/4.jpg">
+                <div id="ctx2" class="timeline-description" style="text-align: justify;">
+                    Tras un enfrentamiento armado al final del Olimpo Radical,
+                    los conservadores retomaron el poder e hicieron grandes cambios:
+                    (i) promulgaron la Constitución de 1886 en la que devolvían
+                    al país al sistema centralista; (ii) le devolvían a la iglesia
+                    su influencia sobre la instrucción educativa y se firmó el
+                    concordato (1887) que consolido el matrimonio entre la
+                    iglesia y el Estado; y (iii), la educación primaria se
+                    mantuvo gratuita pero no obligatoria.
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card" onclick="toggleDescription('ctx3')">
+                <h3>1889–1902</h3>
+                <h4>La Guerra de los Mil Días</h4>
+                <img src="01-graficos/5.jpg">
+                <div id="ctx3" class="timeline-description" style="text-align: justify;">
+                    Fue un enfrentamiento armado entre los partidos Liberal y Conservador
+                    que duró tres años. La disputa obedecía a las diferencias ideológicas
+                    entre los liberales radicales y los reproches que les hacían a las
+                    reformas conservadoras.
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card" onclick="toggleDescription('ctx4')">
+                <h3>1903–1904</h3>
+                <h4>Ley 39 de 1903</h4>
+                <img src="01-graficos/6.jpg">
+                <div id="ctx4" class="timeline-description" style="text-align: justify;">
+                    <p>
+                      Después de la guerra que devastó al país, se trató de reconstruir.
+                      Es así como esta ley estableció las bases de la instrucción en Colombia.
+                      En esta ley y en su Decreto Reglamentario (491 de 1904) se hicieron cambios
+                      como: (i) se dividió entre urbana y rural la educación; (ii) se dividió
+                      la educación secundaria entre técnica y clásica; (iii) se distribuyeron
+                      responsabilidades sobre el sistema educativo para la Nación, los departamentos
+                      y los municipios.
+                    </p>
+                    <p>
+                      <strong>Nación</strong>: inspección de la educación y entregar
+                      útiles y textos a todas las escuelas primarias.<br>
+                      <strong>Departamentos</strong>: Financiar la educación,
+                      el pago de maestros y dirigir, proteger y supervisar la educación primaria.<br>
+                      <strong>Municipios</strong>: Suministrar locales y enseres.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card simple">
+                <h3>1913</h3>
+                <h4>Ley 114 de 1913</h4>
+                <p class="simple-text" style="text-align: justify;">
+                    Esta ley crea las pensiones y determina las jubilaciones de
+                    los maestros de escuela.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card simple">
+                <h3>1927</h3>
+                <h4>Ley 56 de 1927</h4>
+                <p class="simple-text" style="text-align: justify;">
+                    Esta ley vuelve la educación primaria obligatoria.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card" onclick="toggleDescription('ctx7')">
+                <h3>1930</h3>
+                <h4>Fin de la Hegemonía Conservadora</h4>
+                <img src="01-graficos/7.jpg">
+                <div id="ctx7" class="timeline-description" style="text-align: justify;">
+                    Los conservadores pierden el poder a manos del liberal
+                    Enrique Olaya Herrera, los conservadores sufrieron un gran
+                    desprestigio que los sacó del poder. La crisis de 1929, el
+                    endeudamiento y la masacre de las bananeras (1928)
+                    desdibujaron la imagen del partido ante las masas.
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card simple">
+                <h3>1937</h3>
+                <h4>Ley 2 de 1937</h4>
+                <p class="simple-text" style="text-align: justify;">
+                    Esta ley da estabilidad laboral a los maestros y garantiza
+                    un salario mínimo de 40 pesos mensuales.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card" onclick="toggleDescription('ctx9')">
+                <h3>1938</h3>
+                <h4>Creación del Fondo de Fomento Municipal</h4>
+                <img src="01-graficos/8.jpg">
+                <div id="ctx9" class="timeline-description" style="text-align: justify;">
+                  Los primeros años de la Hegemonía Liberal no hubo grandes
+                  cambios, aunque se mostró interés por centralizar más la
+                  educación. Hasta esta fecha se creó el Fondo como respuesta a
+                  las amplias desigualdades regionales en la provisión educativa,
+                  este Fondo buscaba apoyar a los municipios a financiar la
+                  construcción de escuelas.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="image-card-container">
+
+        <!-- === CUADRO 1. ANALFABETISMO === -->
+        <div class="image-card" onclick="toggleImageText('img1')">
+            <h3 class="image-card-title">Tasa de Analfabetismo</h3>
+
+            <img src="01-graficos/10.png" class="image-card-img">
+
+            <div class="image-card-caption">
+                <strong>Fuente:</strong> Elaboración propia a partir del
+                Montevideo-Oxford Latin American Economic History Database (MOxLAD).
+            </div>
+
+            <div id="img1" class="image-card-text" style="text-align: justify;">
+              El analfabetismo en Colombia en la primera mitad del siglo oscilo
+              en niveles muy altos, la tasa de analfabetismo inició el siglo en 65%
+              y terminó en 1950 en 40%. La reducción, aunque amplia, se da en
+              un periodo aún más amplio. Un contraste con otros países
+              sugiere que el comportamiento de la tasa de analfabetismo
+              de Colombia era relativamente bueno, estábamos por debajo de
+              muchos países de la región, aunque por encima de otros. <br>
+              La tasa de analfabetismo se redujo entre 1900 y 1950, pero desde
+              1950 fue cuando empezó su reducción más drástica.
+              La segunda mitad del siglo comenzó con un alto porcentaje
+              de la población adulta sin capacidades de lecto-escritura.
+            </div>
+        </div>
+
+        <!-- === CUADRO 2.GASTO PUBLICO EN EDUCACION === -->
+        <div class="image-card" onclick="toggleImageText('img2')">
+            <h3 class="image-card-title">Gasto Público en Educación</h3>
+
+            <img src="01-graficos/11.png" class="image-card-img">
+
+            <div class="image-card-caption">
+                <strong>Fuente:</strong> Cálculos propios y elaboración
+                a partir de anuarios de estadísticas educativas del DANE
+                (DANE, 2025, pp. 117-118) y las Estadísticas Económicas Históricas
+                del DNP (Dirección de Estudios Económicos del DNP, 2024).
+            </div>
+
+            <div id="img2" class="image-card-text" style="text-align: justify;">
+              En la primera mitad del siglo, el gato público en educación
+              se mantuvo estancado. El gasto público como proporción (naranja)
+              tuvo un incremento inicial después del inicio de la década de 1930 y
+              luego una caída posterior. Los avances en política educativa fueron
+              importantes, pero se estancaron rápidamente.  <br>
+              Ese estancamiento es más claro cuando se ve el gasto público
+              en educación ajustado a la volatilidad del ciclo económico (verde).
+              De hecho, entre 1935 y 1958 parece haberse mantenido relativamente
+              invariante. Es decir, la transición de mitad de siglo tuvo un sistema
+              educativo con una financiación nacional con los mismos recursos
+              financieros que en 1935.
+            </div>
+        </div>
+    </div>
+    <div class="image-card-container">
+      <!-- === CUADRO 3. BRECHA DE ACCESO === -->
+      <div class="image-card" onclick="toggleImageText('img3')">
+          <h3 class="image-card-title">Brechas de Género en el acceso a la Educación</h3>
+
+          <img src="01-graficos/13.png" class="image-card-img">
+
+          <div class="image-card-caption">
+              <strong>Fuente:</strong> Tomado de Iregui-Bohórquez et al. (2025).
+          </div>
+
+          <div id="img3" class="image-card-text" style="text-align: justify;">
+            En educación primaria, la brecha de acceso a la educación
+            entre hombre y mujeres cayó ampliamente desde antes de
+            que iniciara el siglo XX. Y, en la primera mitad del siglo, la
+            brecha llegó a niveles muy cercanos a cero. <br>
+            En educación secundaria, la brecha de acceso al inicio del siglo sí existía
+            y persistió en niveles cercanos al 15% a lo largo de la primera mitad, con
+            incrementos y disminuciones leves. <br>
+            De este modo, el sistema educativo al que entraría María
+            era un sistema educativo en el que el acceso a educación
+            primaria era paritario entre hombres y mujeres, pero
+            si existían brechas de acceso a educación secundaria.
+
+          </div>
+      </div>
+
+      <!-- === CUADRO 4.Desigualdades regionales=== -->
+      <div class="image-card" onclick="toggleImageText('img4')">
+          <h3 class="image-card-title">Desigualdades regionales en la decada de 1950</h3>
+
+          <img src="01-graficos/9.png" class="image-card-img">
+
+          <div class="image-card-caption">
+              <strong>Fuente:</strong> Cálculos propios a partir de anuarios de
+              estadísticas educativas del DANE (DANE, 2025a, pp. 8-26)  con estimaciones de
+              Romero-Baquero & Amézquita-Zárate (2021) y elaboración con base en
+              el Marco Geoestadístico Nacional de 2021 (DANE, 2025b).
+          </div>
+
+          <div id="img4" class="image-card-text" style="text-align: justify;">
+            El que la provisión de educación fuera
+            responsabilidad de municipios y departamentos hizo
+            que existiera una desigualdad en la provisión en las
+            regiones y de la expansión de la cobertura educativa,
+             sobre todo, de educación pública. <br>
+            El panel A muestra que en 1950 el ingreso per cápita
+            de las regiones era distinto, es decir, había desigualdad
+            del ingreso regional. El panel B muestra que la calidad
+            educativa (privada y pública) en primaria, medida a través
+            del número de estudiantes por profesor, también difería
+            entre regiones. <br>
+            Si bien estos gráficos no muestran una fuerte
+            correlación entre ingreso y calidad educativa regional,
+            ilustran esta idea. <br>
+            Para esta historia es importante que note que las
+            Santander y Norte de Santander, donde estudió María,
+            son dos de los departamentos con mejor calidad
+            educativa medida con nuestra variable proxy.
+          </div>
+      </div>
+    </div>
+
+</section>
+
+<!— ===========================================================================
+SECCION 2
+============================================================================-->
+
+<section id="edu-inicial" class="page">
+    <h1 class="page-title">La educación inicial de María (1958-1969)</h1>
+    <p class="section-description">
+      Eventos claves del periodo histórico
+      representados visualmente.
+    </p>
+
+
+
+
+
+</section>
+
+<!— ===========================================================================
+SECCION 3
+============================================================================-->
+
+<section id="labor-inicial" class="page">
+    <h1 class="page-title">Educacion superior y primeros pasos en la vida laboral (1972-1981)</h1>
+</section>
+
+<!— ===========================================================================
+SECCION 4
+============================================================================-->
+
+<section id="labor-consolidada" class="page">
+    <h1 class="page-title">Trayectoria laboral consolidada</h1>
+</section>
+
+
+<!— ===========================================================================
+SECCION 5
+============================================================================-->
+
+<section id="reflexion" class="page">
+    <h1 class="page-title">Trayectoria laboral consolidada</h1>
+</section>
+
+<!— ===========================================================================
+SECCION 6
+============================================================================-->
+
+<section id="referencias" class="page">
+
+    <h1 class="page-title">Referencias</h1>
+
+    <div class="references-container">
+
+        <h2 class="reference-title">Referencias Documentales</h2>
+
+        <div class="reference-block">
+            <p class="reference-item">
+              Iregui-Bohórquez, A. M., Melo-Becerra, L. A., Ramírez-Giraldo, M. T., &
+              Rodríguez-Arenas, J. L. (2025). De la cobertura al desempeño: Explorando
+              las brechas de género en el sistema educativo colombiano. Borradores
+              de Economia, Banco de la República, 1301. https://ideas.repec.org/p/bdr/borrec/1301.html#download
+            </p>
+
+            <p class="reference-item">
+              Ramírez, M. T., & Tellez, J. P. (2006). La educación primaria y
+              secundaria en Colombia en el siglo XX. Borradores de Economía, Banco de
+              la República, 379. https://www.banrep.gov.co/es/educacion-primaria-y-secundaria-colombia-el-siglo-xx
+            </p>
+
+            <p class="reference-item">
+              Romero-Baquero, C.-A., & Amézquita-Zárate, P. (2021). Gasto público
+              departamental en educación y salud en Colombia (1918-1973).
+              Investigaciones de Historia Económica, 29-46. https://doi.org/10.33231/j.ihe.2020.10.003
+            </p>
+        </div>
+
+        <h2 class="reference-title">Referencias de Datos</h2>
+
+        <div class="reference-block">
+            <p class="reference-item">
+              DANE. (2025). 50 años de estadísticas educativas 1933-1983.
+              Biblioteca virtual del DANE. https://biblioteca.dane.gov.co/biblioteca/books/233/
+            </p>
+            <p class="reference-item">
+              DANE. (2025). Geoportal DANE- Página de descarga [Dataset].
+              https://www.dane.gov.co/files/geoportal-provisional/
+            </p>
+
+            <p class="reference-item">
+              Dirección de Estudios Económicos del DNP. (2024).
+              Estadísticas Históricas de Colombia [Dataset].
+              https://www.dnp.gov.co:443/LaEntidad_/subdireccion-general-inversiones-seguimiento-evaluacion/direccion-estudios-economicos/Paginas/estadisticas-historicas-de-colombia.aspx
+            </p>
+
+            <p class="reference-item">
+              MOxLAD. (2025). Montevideo-Oxford Latin American Economic History Database
+              [Dataset]. https://bancodedatos-fcs.shinyapps.io/MOXLAD/
+            </p>
+        </div>
+
+        <h2 class="reference-title">Referencias Cualitativas</h2>
+
+        <div class="reference-block">
+            <p class="reference-item">
+              María del Tránsito Bernal. Abuela. Entrevista realizada el 2 de noviembre de 2025.
+            </p>
+            <p class="reference-item">
+              Hernando Gil Ruiz. Abuelo. Entrevista realizada el 2 de noviembre de 2025.
+            </p>
+        </div>
+
+        <h2 class="reference-title">Referencias Fotográficas</h2>
+
+        <div class="reference-block">
+            <p class="reference-item">
+              Archivo Familiar. Fotografías XX XX XX.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- FINAL DE LA PAGINA-->
+</main>
+
+<footer>
+    <div>Historia de Colombia</div>
+    <div>&copy; <span id="year"></span> · Miguel Torres</div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+}
+
+function toggleRetrato() {
+    document.getElementById("retrato-caption").classList.toggle("open");
+}
+
+function toggleDescription(id) {
+    document.getElementById(id).classList.toggle("open");
+}
+
+function toggleImageText(id) {
+    document.getElementById(id).classList.toggle("open");
+}
+
+function toggleMenu() {
+    const panel = document.getElementById('menu-panel');
+    panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+}
+
+</script>
+
+</body>
+</html>
