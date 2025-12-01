@@ -487,13 +487,17 @@
             stroke-width: 0.6;
         }
 
-        /* paleta de azules suaves, translúcidos */
-        .dept-1 { fill: rgba(37, 99, 235, 0.22); }
-        .dept-2 { fill: rgba(59, 130, 246, 0.22); }
-        .dept-3 { fill: rgba(96, 165, 250, 0.22); }
-        .dept-4 { fill: rgba(129, 199, 255, 0.22); }
-        .dept-5 { fill: rgba(56, 189, 248, 0.22); }
+        .image-card-container.triple {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
 
+        .image-card-container.triple .image-card {
+            max-width: 480px;   /* ajuste del ancho de los bloques de 3*/
+            flex: 1;
+        }
 
     </style>
 </head>
@@ -801,6 +805,7 @@ SECCION 1
             </div>
         </div>
     </div>
+
     <div class="image-card-container">
       <!-- === CUADRO 3. BRECHA DE ACCESO === -->
       <div class="image-card" onclick="toggleImageText('img3')">
@@ -1069,13 +1074,18 @@ SECCION 2
 
           <div class="map-card-caption">
             <strong>Fotografía 2. Primera comunión de María. </strong> <br>
-            Fuente: Archivo Familiar.
+            <strong>Fuente: </strong> Archivo Familiar.
           </div>
 
-          <p class="map-card-text">
-              El Socorro es un municipio histórico del departamento de Santander,
-              reconocido por su importancia educativa y cultural en la región.
-              Aquí puedes agregar cualquier descripción relevante.
+          <p class="map-card-text" style="text-align: justify;">
+            María nació y vivió sus primeros años en la zona urbana del Socorro.
+            Sus padres fueron Clementina Cobos y Rafael Bernal, ambos sabían leer
+            y escribir y tenían formación de algún tipo. Clementina tenía
+            conocimientos de enfermería y Rafael de veterinaria. <br>
+            Cuando tuvo edad, María empezó a estudiar su primaria en el colegio
+            privado La Presentación, dirigido por monjas, en el que pagaba una
+            pensión mensual de $25 pesos (ver contrastes históricos 1 y 2).
+
           </p>
 
           <button class="map-card-close" onclick="hideMapCard('socorro-card')">Cerrar</button>
@@ -1089,13 +1099,16 @@ SECCION 2
 
           <div class="map-card-caption">
             <strong>Fotografía 3. Diploma de 9° de María. </strong> <br>
-            Fuente: Archivo Familiar.
+            <strong>Fuente: </strong> Archivo Familiar.
           </div>
 
-          <p class="map-card-text">
-              El Socorro es un municipio histórico del departamento de Santander,
-              reconocido por su importancia educativa y cultural en la región.
-              Aquí puedes agregar cualquier descripción relevante.
+          <p class="map-card-text" style="text-align: justify;">
+              Al finalizar sus estudios de primaria, María quiso irse a un
+              internado. Sus padres la apoyaron y la enviaron al Colegio del
+              Sagrado Corazón de Jesús de Zapatoca, un internado femenino en el
+              que pagaba una pensión mensual de $250 pesos (ver contraste
+              histórico 1). Ahí se graduó de básica secundaria como Auxiliar
+              en Contabilidad y Secretariado en 1966.
           </p>
 
           <button class="map-card-close" onclick="hideMapCard('zapatoca-card')">Cerrar</button>
@@ -1109,19 +1122,111 @@ SECCION 2
 
           <div class="map-card-caption">
             <strong>Fotografía 4. Diploma de Bachiller de María. </strong> <br>
-            Fuente: Archivo Familiar.
+            <strong>Fuente: </strong> Archivo Familiar.
           </div>
 
-          <p class="map-card-text">
-              El Socorro es un municipio histórico del departamento de Santander,
-              reconocido por su importancia educativa y cultural en la región.
-              Aquí puedes agregar cualquier descripción relevante.
+          <p class="map-card-text" style="text-align: justify;">
+              Como el internado de Zapatoca solo tenía formación hasta básica
+              secundaria, María se fue a estudiar a la sede del colegio que se
+              encontraba en Pamplona para terminar su formación secundaria.
+              Ahí pagaba una pensión mensual de $280 pesos (ver contraste histórico 1).
+              Después de dos años de educación de calidad, al final, en 1969,
+              obtuvo su título de bachiller académico (ver contraste histórico 3).
           </p>
 
           <button class="map-card-close" onclick="hideMapCard('pamplona-card')">Cerrar</button>
     </div>
 
+    <!--SUBSECCION DE CONTRASTES HISTORICOS-->
 
+    <h3 class="page-title"> Contrastes Históricos</h3>
+
+    <div class="image-card-container triple">
+
+      <!-- === CUADROs 1-3 === -->
+      <div class="image-card" onclick="toggleImageText('img21')">
+          <!-- contenido bloque 1 -->
+          <h4 class="image-card-title">1 <br> ¿Cuánto costaban las pensiones de los colegios de María?</h4>
+
+          <img src="01-graficos/18.jpg" class="image-card-img">
+
+          <div id="img21" class="image-card-text" style="text-align: justify;">
+            Ajustemos los valores a los precios de hoy usando el salario mínimo
+            de 1958, 1964 y 1967. <br>
+            <strong> Cálculo:</strong> El salario mínimo de 2025 es de $1,423,500
+            pesos. Si nos devolvemos: en 1958, el salario mínimo era de $155,4
+            pesos; en 1964 y en 1967, estuvo vigente el salario de 1964, que
+            era de $420 pesos. <br>
+            <strong>Pensión de primaria: </strong> Mensual le dieron al colegio
+            por 6 años un monto que era un 16% de un salario mínimo ($25) y un
+            monto por encima de la línea de pobreza monetaria extrema para una
+            persona ($226.000 en pesos de 2025). <br>
+            <strong>Pensión de secundaria 1: </strong> Mensual le dieron al
+            colegio por 3 años un monto equivalente al 60% de un salario mínimo,
+            más de 800.000 pesos actuales. <br>
+            <strong>Pensión de secundaria 2: </strong> Mensual le dieron al
+            colegio por 2 años un monto equivalente a dos terceras partes de un
+            salario mínimo, $949.000 de hoy.
+          </div>
+      </div>
+
+      <div class="image-card" onclick="toggleImageText('img22')">
+          <!-- contenido bloque 1 -->
+          <h4 class="image-card-title">2 <br> ¿Qué tan diferentes eran los
+            colegios privados y públicos de primaria?
+          </h4>
+
+          <img src="01-graficos/14.png" class="image-card-img">
+
+          <div class="image-card-caption">
+            <strong>Diferencia entre el numero de estudiantes por profesor entre
+              colegios públicos y privados en 1953</strong> <br>
+            <strong>Fuente: </strong> Cálculos propios a partir de anuarios de
+            estadísticas educativas del DANE (DANE, 2025a, pp. 8-26) con estimaciones de
+            Romero-Baquero & Amézquita-Zárate (2021) y elaboración con base en
+            el Marco Geoestadístico Nacional de 2021 (DANE, 2025b).
+          </div>
+
+          <div id="img22" class="image-card-text" style="text-align: justify;">
+            Esto dependía de las regiones, si comparamos la cantidad de
+            estudiantes por profesor que en 1953 tenían disponibles los colegios
+            privados frente a los públicos, las diferencias regionales son grandes.
+            Pero, note que en Santander la diferencia era muy grande, eso significa
+            que María tuvo la oportunidad de disfrutar de una educación muy
+            personalizada que no habría tenido en un colegio público.
+          </div>
+      </div>
+
+      <div class="image-card" onclick="toggleImageText('img23')">
+          <!-- contenido bloque 1 -->
+          <h4 class="image-card-title">3 <br> ¿Qué tan importante fue que María
+            pudiera estudiar secundaria en un colegio privado?
+          </h4>
+
+          <img src="01-graficos/12.png" class="image-card-img">
+
+          <div class="image-card-caption">
+            <strong>Número de establecimientos para bachillerato académico por
+              prestación pública (oficial) o privada (no oficial)</strong> <br>
+            <strong>Fuente: </strong> Elaboración propia a partir de anuarios de
+            estadísticas educativas del DANE (DANE, 2025a, pp. 86-87).
+          </div>
+
+        <div id="img23" class="image-card-text" style="text-align: justify;">
+            Mucho, a lo largo de la primera mitad del siglo, la educación
+            secundaria pública se mantuvo rezagada. Hasta 1938 se abrieron
+            los primeros colegios públicos de ese tipo y durante el tiempo
+            siguiente la mayoría de las instituciones de educación secundaria
+            fueron privadas y, en consecuencia, la mayoría de los docentes de
+            este nivel estaban allí. <br>
+            Note que el número de establecimientos públicos de secundaria
+            académica —el tipo de secundaria que estudió María— fue inferior
+            siempre al de establecimientos privados durante todos los años en los
+            que María estudió.
+        </div>
+      </div>
+
+</div>
 
 
 </section>
