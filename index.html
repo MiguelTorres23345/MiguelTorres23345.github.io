@@ -499,6 +499,82 @@
             flex: 1;
         }
 
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 3rem auto;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+        }
+
+        .carousel-slide {
+            display: none;
+            position: relative;
+            width: 100%;
+        }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        .carousel-img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 14px 14px 0 0;
+        }
+
+        .carousel-content {
+            background: var(--blanco-roto);
+            padding: 1rem 1.5rem;
+            border-radius: 0 0 14px 14px;
+        }
+
+        .carousel-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--azul-profundo);
+        }
+
+        .carousel-caption {
+            font-size: 0.85rem;
+            color: var(--texto-suave);
+            margin-bottom: 0.6rem;
+        }
+
+        .carousel-text {
+            font-size: 1rem;
+            color: var(--texto-principal);
+            line-height: 1.55;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 45%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            color: #0b1f3b;
+            border: none;
+            padding: 0.6rem 0.8rem;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .carousel-btn.left { left: 15px; }
+        .carousel-btn.right { right: 15px; }
+
+        .contain-img {
+            object-fit: contain !important;
+            background: white;   /* opcional para que se vea limpio ademas de que fuerce a que se vea toda la img en el carrusel*/
+        }
+
+
     </style>
 </head>
 
@@ -871,7 +947,7 @@ SECCION 1
 
 </section>
 
-<!— ===========================================================================
+<!-- ===========================================================================
 SECCION 2
 ============================================================================-->
 
@@ -1137,7 +1213,7 @@ SECCION 2
           <button class="map-card-close" onclick="hideMapCard('pamplona-card')">Cerrar</button>
     </div>
 
-    <!--SUBSECCION DE CONTRASTES HISTORICOS-->
+    <!-- SUBSECCION DE CONTRASTES HISTORICOS-->
 
     <h3 class="page-title"> Contrastes Históricos</h3>
 
@@ -1226,17 +1302,152 @@ SECCION 2
         </div>
       </div>
 
-</div>
-
-
 </section>
 
-<!— ===========================================================================
+<!-- ===========================================================================
 SECCION 3
 ============================================================================-->
 
 <section id="labor-inicial" class="page">
-    <h1 class="page-title">Educacion superior y primeros pasos en la vida laboral (1972-1981)</h1>
+    <h1 class="page-title">Educacion superior y primeros pasos en la vida laboral</h1>
+    <h3 class="page-subtitle">(1969-1981)</h3>
+
+    <div class="carousel">
+
+        <!-- Slide 1 -->
+        <div class="carousel-slide active">
+            <img src="01-graficos/19.jpg" class="carousel-img">
+
+            <div class="carousel-content">
+                <h2 class="carousel-title">1969-1970</h2>
+                <div class="carousel-caption"><strong>Mesa de los Santos (Santander) </strong> <br>
+                    <strong>Fuente: </strong> Archivo Familiar.
+                </div>
+                <p class="carousel-text" style="text-align: justify;">
+                  Después de terminar sus estudios de secundaria,
+                  María se devolvió al Socorro. Estuvo ahí por un tiempo,
+                  hasta que consiguió un trabajo en la escuela en la que
+                  estudiaba su hermano, Rafael Hernando Bernal, en
+                  Mesa de los Santos (Santander), un municipio ubicado
+                  sobre la Meseta de Jeridas. <br>
+                  Con la oferta laboral, María se mudó a Mesa de los
+                  Santos, trabajó y vivió ahí durante todo 1970.
+                  Fue su primer trabajo, fue profesora de español,
+                  religión y matemáticas en el Colegio Santo Domingo
+                  Savio, un colegio mixto de unos 120 estudiantes. <br>
+                  María no recibió formación especial para ser profesora,
+                  ni siquiera era normalista. Según dice, así era en esa época.
+                  Ella seguía unas guías o cartillas que enviaban desde el
+                  ministerio, estudiaba el contenido y hacia sus clases.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+            <img src="01-graficos/20.png" class="carousel-img contain-img">
+
+            <div class="carousel-content">
+                <h2 class="carousel-title">Contraste Histórico</h2>
+                <div class="carousel-caption">
+                  <strong>Número de docentes por tipo de colegio y zona en Santander en 1973</strong> <br>
+                  <strong>Fuente:</strong> Cálculos y elaboración propia a partir del Anuario de Estadística de Santander de 1973 (Velásquez Cook et al., 1973, pp.42-45).
+
+                </div>
+                <p class="carousel-text" style="text-align: justify;">
+                  En la época el número de mujeres profesoras era inferior al de hombres. Para 1973, el número de educadores hombres en Santander seguía superando al de mujeres. El personal docente del sistema educativo santandereano no era paritario, las brechas, de hecho, eran amplias. <br>
+                  María fue profesora, pero las posibilidades de una mujer de serlo frente a las de un hombre no parecían ser las mismas en el sistema educativo en el que inició su vida laboral.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+            <img src="01-graficos/22.jpg" class="carousel-img">
+
+            <div class="carousel-content">
+                <h2 class="carousel-title">1971</h2>
+                <p class="carousel-text" style="text-align: justify;">
+                    Cuando terminó su trabajo en Mesa de los Santos, María regreso brevemente al Socorro antes de retomar sus actividades laborales. Su siguiente trabajo fue como bibliotecaria, también en un colegio. Pero esta vez fue en una escuela industrial masculina en Barrancabermeja.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="carousel-slide">
+            <img src="01-graficos/21.jpg" class="carousel-img">
+
+            <div class="carousel-content">
+                <h2 class="carousel-title">1972-1975</h2>
+                <div class="carousel-caption"><strong>UPTC (1954)</strong> </div>
+                <p class="carousel-text" style="text-align: justify;">
+                    El primer semestre de 1972, María regreso al Socorro. Pero su estadía no duró más que eso porque, por inspiración y ayuda de una amiga suya que era profesional, decidió aplicar a la Universidad Pedagógica y Tecnológica de Colombia (UPTC) en Tunja (Boyacá). Y pasó...
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Slide 5 -->
+        <div class="carousel-slide">
+            <img src="01-graficos/23.jpg" class="carousel-img">
+
+            <div class="carousel-content">
+                <h2 class="carousel-title">1975</h2>
+                <div class="carousel-caption"><strong> María tomando la ostia durante su ceremonia de matrimonio<br>Fuente:</strong> Archivo Familiar.</div>
+                <p class="carousel-text" style="text-align: justify;">
+                  En este año  María quedó embarazada. No había terminado
+                  sus estudios y se había enamorado de Hernando Gil.
+                  Sin haber terminado sus estudios, María se casó y tuvo a
+                  su primera hija, a Lida. <br>
+                  Quiso retomar sus estudios, pero los paros que sufrió la
+                  universidad pública en 1976 se lo impidieron. <br>
+                  Así, buscó y consiguió un trabajo temporal, de seis meses,
+                  como contadora en Corpieles, una empresa de curtiembres de Boyacá.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Slide 6 -->
+        <div class="carousel-slide">
+            <img src="01-graficos/24.jpg" class="carousel-img">
+
+            <div class="carousel-content">
+                <h2 class="carousel-title">1976</h2>
+                <div class="carousel-caption"><strong>Familia Gil Bernal (De izquierda a derecha:
+                  Lida, Hernando, Rafael, Liliana y María)<br>
+                  Nota: </strong> Rafael aún ni había nacido para la fecha.<br>
+                  <strong>Fuente:</strong> Archivo Familiar.</div>
+                <p class="carousel-text" style="text-align: justify;">
+                  María volvió a estar embarazada, en sus primeros meses de
+                  embarazo estuvo terminando su trabajo en Corpieles, al final
+                  del año nació Liliana, su segunda hija.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Slide 7 -->
+        <div class="carousel-slide">
+            <img src="01-graficos/25.jpg" class="carousel-img">
+
+            <div class="carousel-content">
+                <h2 class="carousel-title">1977-1981</h2>
+                <div class="carousel-caption"><strong> Invitación al grado de María como Licenciada en Biología y Química<br>Fuente:</strong> Archivo Familiar.</div>
+                <p class="carousel-text" style="text-align: justify;">
+                  En estos años María retomo por completo sus estudios, gracias a un apoyo financiero de su madre, María pudo delegar en una niñera las labores de cuidado del hogar y de sus hijas. Lo que le permitió terminar sus estudios en 1981
+                </p>
+            </div>
+        </div>
+
+        <!-- CONTROLES -->
+        <button class="carousel-btn left" onclick="prevSlide()">❮</button>
+        <button class="carousel-btn right" onclick="nextSlide()">❯</button>
+
+    </div>
+
+
+
 </section>
 
 <!— ===========================================================================
@@ -1256,10 +1467,9 @@ SECCION 5
     <h1 class="page-title">Trayectoria laboral consolidada</h1>
 </section>
 
-<!— ===========================================================================
-SECCION 6
+<!-- ===========================================================================
+SECCION 6 REFERENCIAS
 ============================================================================-->
-
 <section id="referencias" class="page">
 
     <h1 class="page-title">Referencias</h1>
@@ -1316,6 +1526,13 @@ SECCION 6
             <p class="reference-item">
               MOxLAD. (2025). Montevideo-Oxford Latin American Economic History Database
               [Dataset]. https://bancodedatos-fcs.shinyapps.io/MOXLAD/
+              Velasquez Cock, A., Martinez Salazar, O., Ojeda Gomez, S., & Restrepo, P. R. (1973). Anuario Estadístico de Santander. Planeacion Departamental de Santander y DANE. https://biblioteca.dane.gov.co/media/libros/LD_70110_1973_EJ_3.PDF
+            </p>
+
+            <p class="reference-item">
+              Velasquez Cock, A., Martinez Salazar, O., Ojeda Gomez, S., &
+              Restrepo, P. R. (1973). Anuario Estadístico de Santander. Planeacion
+              Departamental de Santander y DANE. https://biblioteca.dane.gov.co/media/libros/LD_70110_1973_EJ_3.PDF
             </p>
         </div>
 
@@ -1398,6 +1615,20 @@ function showMapCard(id) {
 function hideMapCard(id) {
     document.getElementById(id).style.display = "none";
 }
+
+
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+
+function showSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+}
+
+function nextSlide() { showSlide(currentSlide + 1); }
+function prevSlide() { showSlide(currentSlide - 1); }
+
 
 </script>
 
