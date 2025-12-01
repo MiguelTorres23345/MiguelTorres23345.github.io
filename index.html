@@ -574,6 +574,59 @@
             background: white;   /* opcional para que se vea limpio ademas de que fuerce a que se vea toda la img en el carrusel*/
         }
 
+        .triple-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;   /* 25% – 50% – 25% */
+            gap: 2rem;
+            margin: 3rem auto;
+            align-items: center;
+        }
+
+        /* Bloques laterales */
+        .side-card .image-card.small {
+            max-width: 100%;
+            padding: 0.8rem 1rem;
+        }
+
+        .side-text-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;  /* izquierda – centro – derecha */
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 3rem auto;
+            align-items: start;
+        }
+
+        .center-column {
+            display: flex;
+            justify-content: center;  /* centra dentro de su espacio */
+            align-items: flex-start;
+            text-align: center;
+        }
+
+
+        .poetry-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--texto-principal);
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .triple-layout {
+                grid-template-columns: 1fr;
+            }
+            .center-text-block {
+                order: -1;
+            }
+        }
+
+        .image-card.small {
+            max-width: 260px;
+            padding: 0.8rem 1rem;
+        }
+
 
     </style>
 </head>
@@ -592,8 +645,7 @@
                   <a onclick="showPage('contexto'); toggleMenu()">El cambio de siglo</a>
                   <a onclick="showPage('edu-inicial'); toggleMenu()">Educación inicial</a>
                   <a onclick="showPage('labor-inicial'); toggleMenu()">Educación superior y primeros trabajos</a>
-                  <a onclick="showPage('labor-consolidada'); toggleMenu()">Trayectoria laboral</a>
-                  <a onclick="showPage('reflexion'); toggleMenu()">Reflexión</a>
+                  <a onclick="showPage('reflexion'); toggleMenu()">Trayectoria laboral y reflexion</a>
                   <a onclick="showPage('referencias'); toggleMenu()">Referencias</a>
               </div>
           </div>
@@ -1320,7 +1372,7 @@ SECCION 3
 
             <div class="carousel-content">
                 <h2 class="carousel-title">1969-1970</h2>
-                <div class="carousel-caption"><strong>Mesa de los Santos (Santander) </strong> <br>
+                <div class="carousel-caption"><strong>Fotografía 5.</strong> Mesa de los Santos (Santander) <br>
                     <strong>Fuente: </strong> Archivo Familiar.
                 </div>
                 <p class="carousel-text" style="text-align: justify;">
@@ -1351,12 +1403,18 @@ SECCION 3
                 <h2 class="carousel-title">Contraste Histórico</h2>
                 <div class="carousel-caption">
                   <strong>Número de docentes por tipo de colegio y zona en Santander en 1973</strong> <br>
-                  <strong>Fuente:</strong> Cálculos y elaboración propia a partir del Anuario de Estadística de Santander de 1973 (Velásquez Cook et al., 1973, pp.42-45).
+                  <strong>Fuente:</strong> Cálculos y elaboración propia a partir
+                  del Anuario de Estadística de Santander de 1973 (Velásquez Cook et al., 1973, pp.42-45).
 
                 </div>
                 <p class="carousel-text" style="text-align: justify;">
-                  En la época el número de mujeres profesoras era inferior al de hombres. Para 1973, el número de educadores hombres en Santander seguía superando al de mujeres. El personal docente del sistema educativo santandereano no era paritario, las brechas, de hecho, eran amplias. <br>
-                  María fue profesora, pero las posibilidades de una mujer de serlo frente a las de un hombre no parecían ser las mismas en el sistema educativo en el que inició su vida laboral.
+                  En la época el número de mujeres profesoras era inferior al de
+                  hombres. Para 1973, el número de educadores hombres en Santander
+                  seguía superando al de mujeres. El personal docente del sistema
+                  educativo santandereano no era paritario, las brechas, de hecho, eran amplias. <br>
+                  María fue profesora, pero las posibilidades de una mujer de
+                  serlo frente a las de un hombre no parecían ser las mismas en el
+                  sistema educativo en el que inició su vida laboral.
                 </p>
             </div>
         </div>
@@ -1368,7 +1426,11 @@ SECCION 3
             <div class="carousel-content">
                 <h2 class="carousel-title">1971</h2>
                 <p class="carousel-text" style="text-align: justify;">
-                    Cuando terminó su trabajo en Mesa de los Santos, María regreso brevemente al Socorro antes de retomar sus actividades laborales. Su siguiente trabajo fue como bibliotecaria, también en un colegio. Pero esta vez fue en una escuela industrial masculina en Barrancabermeja.
+                    Cuando terminó su trabajo en Mesa de los Santos, María
+                    regreso brevemente al Socorro antes de retomar sus actividades
+                    laborales. Su siguiente trabajo fue como bibliotecaria,
+                    también en un colegio. Pero esta vez fue en una escuela
+                    industrial masculina en Barrancabermeja.
                 </p>
             </div>
         </div>
@@ -1381,7 +1443,11 @@ SECCION 3
                 <h2 class="carousel-title">1972-1975</h2>
                 <div class="carousel-caption"><strong>UPTC (1954)</strong> </div>
                 <p class="carousel-text" style="text-align: justify;">
-                    El primer semestre de 1972, María regreso al Socorro. Pero su estadía no duró más que eso porque, por inspiración y ayuda de una amiga suya que era profesional, decidió aplicar a la Universidad Pedagógica y Tecnológica de Colombia (UPTC) en Tunja (Boyacá). Y pasó...
+                    El primer semestre de 1972, María regreso al Socorro.
+                    Pero su estadía no duró más que eso porque, por inspiración
+                    y ayuda de una amiga suya que era profesional, decidió aplicar
+                    a la Universidad Pedagógica y Tecnológica de Colombia (UPTC)
+                    en Tunja (Boyacá). Y pasó...
                 </p>
             </div>
         </div>
@@ -1393,7 +1459,9 @@ SECCION 3
 
             <div class="carousel-content">
                 <h2 class="carousel-title">1975</h2>
-                <div class="carousel-caption"><strong> María tomando la ostia durante su ceremonia de matrimonio<br>Fuente:</strong> Archivo Familiar.</div>
+                <div class="carousel-caption"><strong>Fotografía 6.</strong> María tomando la ostia
+                  durante su ceremonia de matrimonio<br>
+                  <strong>Fuente:</strong> Archivo Familiar.</div>
                 <p class="carousel-text" style="text-align: justify;">
                   En este año  María quedó embarazada. No había terminado
                   sus estudios y se había enamorado de Hernando Gil.
@@ -1414,9 +1482,10 @@ SECCION 3
 
             <div class="carousel-content">
                 <h2 class="carousel-title">1976</h2>
-                <div class="carousel-caption"><strong>Familia Gil Bernal (De izquierda a derecha:
+                <div class="carousel-caption">
+                  <strong>Fotografía 7.</strong> Familia Gil Bernal (De izquierda a derecha:
                   Lida, Hernando, Rafael, Liliana y María)<br>
-                  Nota: </strong> Rafael aún ni había nacido para la fecha.<br>
+                  <strong>Nota: </strong> Rafael aún ni había nacido para la fecha.<br>
                   <strong>Fuente:</strong> Archivo Familiar.</div>
                 <p class="carousel-text" style="text-align: justify;">
                   María volvió a estar embarazada, en sus primeros meses de
@@ -1433,9 +1502,15 @@ SECCION 3
 
             <div class="carousel-content">
                 <h2 class="carousel-title">1977-1981</h2>
-                <div class="carousel-caption"><strong> Invitación al grado de María como Licenciada en Biología y Química<br>Fuente:</strong> Archivo Familiar.</div>
+                <div class="carousel-caption">
+                  <strong>Fotografía 8.</strong> Invitación al grado de María
+                  como Licenciada en Biología y Química.<br>
+                  <strong>Fuente:</strong> Archivo Familiar.</div>
                 <p class="carousel-text" style="text-align: justify;">
-                  En estos años María retomo por completo sus estudios, gracias a un apoyo financiero de su madre, María pudo delegar en una niñera las labores de cuidado del hogar y de sus hijas. Lo que le permitió terminar sus estudios en 1981
+                  En estos años María retomo por completo sus estudios, gracias
+                  a un apoyo financiero de su madre, María pudo delegar en una
+                  niñera las labores de cuidado del hogar y de sus hijas. Lo que
+                  le permitió terminar sus estudios en 1981
                 </p>
             </div>
         </div>
@@ -1454,17 +1529,112 @@ SECCION 3
 SECCION 4
 ============================================================================-->
 
-<section id="labor-consolidada" class="page">
-    <h1 class="page-title">Trayectoria laboral consolidada</h1>
-</section>
-
-
-<!— ===========================================================================
-SECCION 5
-============================================================================-->
-
 <section id="reflexion" class="page">
-    <h1 class="page-title">Trayectoria laboral consolidada</h1>
+    <h1 class="page-title">Trayectoria Laboral (1981-1998)</h1>
+
+    <div class="side-text-grid">
+
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="side-column">
+
+            <div class="image-card small" onclick="toggleImageText('imgLeft1')">
+                <img src="01-graficos/26.jpg" class="image-card-img">
+                <div class="image-card-caption"> <strong>Fotografía 9.</strong>
+                  María contestando el teléfono en su trabajo en la Secretaría de Educación (1988). <br>
+                  <strong>Fuente: </strong>Archivo Familiar.
+                </div>
+            </div>
+
+            <div class="image-card small" onclick="toggleImageText('imgLeft2')">
+                <img src="01-graficos/28.jpg" class="image-card-img">
+                <div class="image-card-caption"> <strong>Fotografía 11.</strong>
+                  María en su oficina en la Secretaría de Educación (1986). <br>
+                  <strong>Fuente: </strong>Archivo Familiar.
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- COLUMNA CENTRAL (TEXTO) -->
+        <div class="center-column">
+            <p class="poetry-text">
+              En el mismo año en que María terminó la universidad (1981)
+              pudo empezar a trabajar. Los estudios de María habían
+              sido en biología y química, pero su interés por la educación
+              terminó por determinar su trayectoria profesional. <br><br>
+              A partir del segundo semestre de 1981 empezó a trabajar
+              como técnica en educación de la Secretaría de Educación
+              de Boyacá, cargo en el que estaría durante varios años,
+              hasta que en 1998 se convirtió en Coordinadora de Educación
+              de la Secretaría. <br><br>
+              En esos años María tuvo dos hijos más (Rafael y Javier)
+              que no fueron un impedimento para que continuara
+              sus actividades profesionales, cómo puede verse en la Fotografía 11.
+
+            </p>
+        </div>
+
+
+        <!-- COLUMNA DERECHA -->
+        <div class="side-column">
+
+            <div class="image-card small" onclick="toggleImageText('imgRight1')">
+                <img src="01-graficos/27.jpg" class="image-card-img">
+                <div class="image-card-caption"> <strong>Fotografía 10.</strong>
+                  María con su hijo Javier.<br>
+                  <strong>Fuente: </strong>Archivo Familiar.
+                </div>
+            </div>
+
+            <div class="image-card small" onclick="toggleImageText('imgRight2')">
+                <img src="01-graficos/29.jpg" class="image-card-img">
+                <div class="image-card-caption"> <strong>Fotografía 12.</strong>
+                  María con su hijo Javier.<br>
+                  <strong>Fuente: </strong>Archivo Familiar.
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <h3 class="page-subtitle">Reflexión Final</h3>
+    <div class="text">
+        <p class="poetry-text" style="text-align: justify;">
+          La historia de María fue una historia de éxito, una trayectoria
+          satisfactoria que tuvo mucho esfuerzo detrás, pero también suerte. <br><br>
+        </p>
+
+          <ul class="poetry-text" style="text-align: justify;">
+            <li>Nacer y crecer en zona urbana, en la región central del país.</li>
+            <li>Tener unos padres con habilidades de lecto-escritura en un
+              país con una parte importante de la población en analfabetismo.</li>
+            <li>Tener una familia con la capacidad financiera para pagar
+               sus estudios en instituciones privadas, en especial los de
+               secundaria en una época con muy baja cobertura pública de
+               educación secundaria.</li>
+            <li>Poder acceder a un sistema educativo de calidad, por haber
+               nacido en uno de los departamentos con mejor ingreso y mejores
+               posibilidades de financiamiento de la educación.</li>
+            <li>Poder continuar sus estudios siendo una mujer con dos hijas.</li> <br>
+          </ul>
+
+        <p class="poetry-text" style="text-align: justify;">
+          Son hechos que ponen en perspectiva el éxito de la vida de María.
+          Sin duda, ninguno excluye el esfuerzo, la dedicación y la pasión por
+          su trabajo, pero sí nos muestran las desigualdades que han hecho que
+          otras mujeres no tuvieran una trayectoria exitosa. <br><br>
+          Las desigualdades son negativas por múltiples razones en las
+          sociedades, la responsabilidad de que existan no reside en María
+          ni en quien tiene privilegio, pero cuando se tiene privilegio, el
+          solo hecho de tenerlo debe ser un recuerdo persistente de la necesidad
+          de hacer lo que esté a nuestro alcance para corregir las desigualdades
+          que injustamente han puesto a otros en posiciones más desfavorables.
+        </p>
+    </div>
+
 </section>
 
 <!-- ===========================================================================
@@ -1551,8 +1721,55 @@ SECCION 6 REFERENCIAS
 
         <div class="reference-block">
             <p class="reference-item">
-              Archivo Familiar. Fotografías XX XX XX.
+              Archivo Familiar. Fotografías 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12.
             </p>
+
+            <p class="reference-item">
+              Imagen de Archivo, Inicio, 1.
+              https://archivobogota.secretariageneral.gov.co/content/la-transformacion-educativa-y-la-escuela-activa
+            </p>
+
+            <p class="reference-item">
+              Imagen de Archivo, El cambio de siglo, 1.
+              https://panoramacultural.com.co/historia/5606/los-tiempos-de-el-olimpo-radical
+            </p>
+
+            <p class="reference-item">
+              Imagen de Archivo, El cambio de siglo, 2.
+              Ilustración del libro Historia de Colombia y sus Oligarquías de Antonio Caballero.
+            </p>
+
+            <p class="reference-item">
+              Imagen de Archivo, El cambio de siglo, 3.
+              https://commons.wikimedia.org/w/index.php?curid=114840386
+            </p>
+
+            <p class="reference-item">
+              Imagen de Archivo, El cambio de siglo, 3.
+              https://commons.wikimedia.org/w/index.php?curid=114840386
+            </p>
+
+            <p class="reference-item">
+              Imagen de Archivo, El cambio de siglo, 4.
+              https://archivobogota.secretariageneral.gov.co/content/la-construccion-modelo-instrucci%C3%B3n-publica-1903
+            </p>
+
+            <p class="reference-item">
+              Imagen de Archivo, El cambio de siglo, 5.
+              https://www.caribeafirmativo.lgbt/masacre-las-bananeras-90-anos-resistencia-del-movimiento-sindical-colombiano/
+            </p>
+
+            <p class="reference-item">
+              Imagen de Archivo, El cambio de siglo, 6.
+              https://bffrepositorio.unal.edu.co/server/api/core/bitstreams/bc045834-0164-4b64-95c6-d2aeeaf5b627/content
+            </p>
+
+            <p class="reference-item">
+              Imagen de Archivo, Educación inicial, 1.
+              https://boyaca7dias.com.co/2023/10/10/galeria-la-universidad-que-se-ha-construido-durante-mas-de-siete-decadas/
+            </p>
+
+
         </div>
 
         <div class="reference-block">
@@ -1571,7 +1788,6 @@ SECCION 6 REFERENCIAS
     </div>
 
 </section>
-
 
 
 <!-- FINAL DE LA PAGINA-->
